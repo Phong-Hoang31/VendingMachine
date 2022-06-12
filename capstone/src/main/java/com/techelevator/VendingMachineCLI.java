@@ -1,15 +1,7 @@
 package com.techelevator;
 
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.PrintWriter;
-import java.math.BigDecimal;
-import java.math.BigInteger;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.Scanner;
 
 public class VendingMachineCLI {

@@ -50,6 +50,7 @@ public class VendingMachine {
     public void showInventory() {
         for (Slot slot : inventory) {
             System.out.println(slot.getSlotLocation() + "|" + slot.getProductName() + "|$" + slot.getPrice() + "|" + slot.getNumberRemaining() + "|" + slot.getType());
+            System.out.println("");
         }
     }
 
@@ -63,18 +64,26 @@ public class VendingMachine {
                 isValidCode = true;
 //                item name, cost, and the money remaining.
                 if (slot.getPrice().compareTo(balance) <= 0) {
-                    System.out.println(slot.getProductName() + " " + slot.getPrice() + " " + balance.subtract(slot.getPrice()));
-                    System.out.println(slot.getDispenseMessage());
-                    Logger.log(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss a ")) + slot.getProductName() + " " + slot.getSlotLocation() + " $" + slot.getPrice() + " $" + balance.subtract(slot.getPrice()));
+                    if (slot.getNumberRemaining() > 0) {
+                        System.out.println(slot.getProductName() + " $" + slot.getPrice() + " $" + balance.subtract(slot.getPrice()));
+                        slot.setNumberRemaining(slot.getNumberRemaining() - 1);
+                        System.out.println(slot.getDispenseMessage());
+                        Logger.log(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss a ")) + slot.getProductName() + " " + slot.getSlotLocation() + " $" + slot.getPrice() + " $" + balance.subtract(slot.getPrice()));
 
-                    return balance.subtract(slot.getPrice());
+                        return balance.subtract(slot.getPrice());
+                    } else {
+                        System.out.println("Sold Out");
+                        System.out.println("");
+                    }
                 } else {
                     System.out.println("Not enough money");
+                    System.out.println("");
                 }
             }
         }
         if (!isValidCode) {
             System.out.println("Invalid code");
+            System.out.println("");
         }
         return balance;
     }

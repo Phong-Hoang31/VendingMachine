@@ -11,6 +11,9 @@ public abstract class Slot {
     private String productName;
 //    The purchase price for the product.
     private BigDecimal price;
+
+
+
     //    The remaining number of items
     private int numberRemaining = 5;
 
@@ -43,5 +46,9 @@ public abstract class Slot {
     }
     public String getDispenseMessage() {
         return dispenseMessage;
+    }
+
+    public void setNumberRemaining(int numberRemaining) {
+        this.numberRemaining = numberRemaining;
     }
 }
